@@ -1,3 +1,5 @@
+use std::fs::File;
+use std::io::Read;
 use crate::vector4::*;
 use crate::matrix4::*;
 use crate::vector3::*;
@@ -7,7 +9,7 @@ pub fn test_vector() {
     println!("Vector3 and Vector4 tests: \n");
 
     /* Test Constructors */
-    println!("Building Vectors. \n");
+    println!("Building Vectors... \n");
     let vec3_empty = Vector3::new(()); // empty tuple creates a Vec3(0, 0, 0)
     let _vec3_zero = Vector3::new(0); // any integer also creates an empty Vec3(0, 0, 0)
     let _vec3_zero = Vector3::zero(); // zero() also creates an empty Vec3(0, 0, 0)
@@ -48,7 +50,7 @@ pub fn test_matrix() {
     println!("Matrix3 and Matrix4 tests: \n");
 
     /* helper vector3s */
-    println!("Building Vectors to assist in Matrix Creation. \n");
+    println!("Building Vectors to assist in Matrix Creation... \n");
     let vec3_empty = Vector3::new(());
     let vec3_zero = Vector3::new(0);
     let vec3_3f32 = Vector3::new((3.0, 3.0, 3.0));
@@ -60,7 +62,7 @@ pub fn test_matrix() {
     println!();
 
     /* Text Constructors */
-    println!("Building Matrices. \n");
+    println!("Building Matrices... \n");
     let _mat3_identity = Matrix3::new(()); // an empty tuple creates an identity Matrix3
     let mat3_identity = Matrix3::identity(); // identity() also creates an identity Matrix3
     let _mat3_zero = Matrix3::new(0); // any integer creates a zero Matrix3
@@ -84,7 +86,7 @@ pub fn test_matrix() {
     println!("mat4_16f32: {:?}", mat4_16f32);
     println!("mat4_4vec4: {:?}", mat4_4vec4);
 
-    println!();
+    println!("\nTesting Static Transformation Constructors... \n");
 
     /* Test Static Constructors */
     let mat4_translate = Matrix4::translate(1.0, 2.0, 3.0);
@@ -110,11 +112,15 @@ pub fn test_matrix() {
     println!();
 
     /* Test Associated Methods */
+    println!("Testing Matrix4-Vector4 and Matrix4-Matrix4 Multiplication... \n");
+
     let mat4_16f32_m_vec4_4f32 = mat4_16f32.mult(&vec4_4f32);
     let mat4_16f32_m_mat4_scale = mat4_16f32.mult(&mat4_scale);
 
     println!("vec4_4f32_mat4_identity: {:?}", mat4_16f32_m_vec4_4f32);
     println!("mat4_16f32_mat4_scale: {:?}", mat4_16f32_m_mat4_scale);
+
+    println!("\nTesting Matrix4 determinant... \n");
 
     let mat4_16f32 = Matrix4::new((4.0, 2.0, 5.0, 2.0,
                                                4.0 , 2.0, 7.0, 2.0,
@@ -123,4 +129,16 @@ pub fn test_matrix() {
     println!("mat4_16f32: {:?}", mat4_16f32);
     println!("det of mat4_16f32: {}", mat4_16f32.det());
 
+}
+
+pub fn test_json_vector() {
+    println!("Testing creating Vector4 from its respective json file:");
+    let vec4_json = Vector4::json("./res/vector.json");
+    println!("{:?}", vec4_json);
+}
+
+pub fn test_json_matrix() {
+    println!("Testing creating Matrix4 from its respective json file:");
+    let mat4_json = Matrix4::json("./res/matrix.json");
+    println!("{:?}", mat4_json);
 }

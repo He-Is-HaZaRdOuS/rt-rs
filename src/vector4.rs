@@ -1,9 +1,16 @@
 #![allow(dead_code)]
+
+use std::fs::File;
+use std::io::Read;
+use serde::{Deserialize, Serialize};
+use serde_json::{Result, Value};
 use crate::DEBUG;
+use crate::matrix4::Matrix4;
 use crate::vector3::Vector3;
 
-#[derive(Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Vector4 {
+    #[serde(rename = "values")]
     pub m_data: [f32; 4],
 }
 
@@ -110,6 +117,30 @@ impl Vector4 {
         where A: Instantiator
     {
         return args.into();
+    }
+
+    pub fn json(path: &str) -> Vector4 {
+        if DEBUG {
+            println!("Vector4::Instantiator: Invoked json overload!");
+        }
+        let mut file = File::open(path).unwrap();
+        let mut data = String::new();
+        file.read_to_string(&mut data).unwrap();
+
+        let json: serde_json::Value =
+            serde_json::from_str(&data).expect("JSON was not well-formatted");
+
+        let vals = json.get("values");
+
+        assert_eq!(4, vals.unwrap().as_array().unwrap().len());
+
+        let vals: Option<&Vec<Value>> = vals.unwrap().as_array();
+        let mut arr = [0.0f32; 4];
+        for i in 0..4 {
+            arr[i] = vals.unwrap().get(i).unwrap().as_f64().unwrap() as f32;
+        }
+
+        return Vector4::new((arr[0], arr[1], arr[2], arr[3]));
     }
 
     /* Static Constructors */
