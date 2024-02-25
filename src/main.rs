@@ -22,5 +22,7 @@ fn main() {
     test_json_vector();
     println!();
     test_json_matrix();
+    println!();
+    test_image();
 
 }

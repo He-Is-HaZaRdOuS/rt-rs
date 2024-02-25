@@ -1,5 +1,7 @@
 use std::fs::File;
 use std::io::Read;
+use rand::{random, Rng};
+use image::{ImageBuffer, RgbImage};
 use crate::vector4::*;
 use crate::matrix4::*;
 use crate::vector3::*;
@@ -141,4 +143,26 @@ pub fn test_json_matrix() {
     println!("Testing creating Matrix4 from its respective json file:");
     let mat4_json = Matrix4::json("./res/matrix.json");
     println!("{:?}", mat4_json);
+}
+
+pub fn test_image() {
+    println!("Generating a 512x512 red-blue gradient image with randomized green value in range of 0-64... (fractal.png) \n");
+    // Construct a new RGB ImageBuffer with the specified width and height.
+    let mut img: RgbImage = ImageBuffer::new(512, 512);
+
+    // Obtain the image's width and height.
+    let (width, height) = img.dimensions();
+
+    // Iterate over the coordinates and pixels of the image
+    for (x, y, pixel) in img.enumerate_pixels_mut() {
+        let r = (0.3 * x as f32) as u8;
+        let b = (0.3 * y as f32) as u8;
+        let g: u8 = random::<u8>() / 4;
+        *pixel = image::Rgb([r, g, b]);
+    }
+
+    // Save the image as “fractal.png”, the format is deduced from the path
+    img.save("fractal.png").unwrap();
+
+
 }
