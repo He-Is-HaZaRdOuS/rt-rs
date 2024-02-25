@@ -1,4 +1,5 @@
 #![allow(dead_code)]
+
 use crate::DEBUG;
 use crate::vector3::Vector3;
 
@@ -21,8 +22,9 @@ impl Matrix3 {
 /* Associative functions implementation block */
 impl Matrix3 {
     /* Constructor */
-    pub fn new<A> (args: A) -> Matrix3
-        where A: Instantiator
+    pub fn new<A>(args: A) -> Matrix3
+    where
+        A: Instantiator,
     {
         return args.into();
     }
@@ -32,18 +34,18 @@ impl Matrix3 {
         if DEBUG {
             println!("Matrix3::Instantiator: Invoked Identity overload!");
         }
-        return Matrix3{m_data: [[1.0, 0.0, 0.0],
-            [0.0, 1.0, 0.0],
-            [0.0, 0.0, 1.0]]};
+        return Matrix3 {
+            m_data: [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],
+        };
     }
 
     pub fn zero() -> Matrix3 {
         if DEBUG {
             println!("Matrix3::Instantiator: Invoked Zero overload!");
         }
-        return Matrix3{m_data: [[0.0, 0.0, 0.0],
-            [0.0, 0.0, 0.0],
-            [0.0, 0.0, 0.0]]};
+        return Matrix3 {
+            m_data: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]],
+        };
     }
 
     fn s_det3(matrix: &Matrix3) -> f32 {
@@ -54,7 +56,6 @@ impl Matrix3 {
             - matrix.m_data[1][0] * matrix.m_data[0][1] * matrix.m_data[2][2]
             - matrix.m_data[0][0] * matrix.m_data[1][2] * matrix.m_data[2][1];
     }
-
 }
 
 impl Instantiator for () {
@@ -62,9 +63,9 @@ impl Instantiator for () {
         if DEBUG {
             println!("Matrix3::Instantiator: Invoked () Identity overload!");
         }
-        return Matrix3{m_data: [[1.0, 0.0, 0.0],
-                                [0.0, 1.0, 0.0],
-                                [0.0, 0.0, 1.0]]};
+        return Matrix3 {
+            m_data: [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],
+        };
     }
 }
 
@@ -73,9 +74,9 @@ impl Instantiator for i64 {
         if DEBUG {
             println!("Matrix3::Instantiator: Invoked (i64) Zero overload!");
         }
-        return Matrix3{m_data: [[0.0, 0.0, 0.0],
-                                [0.0, 0.0, 0.0],
-                                [0.0, 0.0, 0.0]]};
+        return Matrix3 {
+            m_data: [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0], [0.0, 0.0, 0.0]],
+        };
     }
 }
 
@@ -84,7 +85,9 @@ impl Instantiator for &Matrix3 {
         if DEBUG {
             println!("Matrix3::Instantiator: Invoked (&Matrix3) overload!");
         }
-        return Matrix3{m_data: self.m_data };
+        return Matrix3 {
+            m_data: self.m_data,
+        };
     }
 }
 
@@ -93,9 +96,13 @@ impl Instantiator for (f32, f32, f32, f32, f32, f32, f32, f32, f32) {
         if DEBUG {
             println!("Matrix3::Instantiator: Invoked (f32, f32, f32, f32, f32, f32, f32, f32, f32) overload!");
         }
-        return Matrix3{m_data: [[self.0, self.1, self.2],
-            [self.3, self.4, self.5],
-            [self.6, self.7, self.8]]};
+        return Matrix3 {
+            m_data: [
+                [self.0, self.1, self.2],
+                [self.3, self.4, self.5],
+                [self.6, self.7, self.8],
+            ],
+        };
     }
 }
 
@@ -104,8 +111,8 @@ impl Instantiator for (&Vector3, &Vector3, &Vector3) {
         if DEBUG {
             println!("Matrix3::Instantiator: Invoked (&Vector3, &Vector3, &Vector3) overload!");
         }
-        return Matrix3{m_data: [self.0.m_data,
-            self.1.m_data,
-            self.2.m_data]};
+        return Matrix3 {
+            m_data: [self.0.m_data, self.1.m_data, self.2.m_data],
+        };
     }
 }

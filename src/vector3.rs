@@ -1,6 +1,7 @@
 #![allow(dead_code)]
-use crate::vector4::Vector4;
+
 use crate::DEBUG;
+use crate::vector4::Vector4;
 
 #[derive(Debug)]
 pub struct Vector3 {
@@ -72,9 +73,11 @@ impl Vector3 {
     }
 
     pub fn cross(&self, v: &Vector3) -> Vector3 {
-        return Vector3::new(( (self.get_y() * v.get_z()) - (self.get_z() * v.get_y()), //x
-                              (self.get_z() * v.get_x()) - (self.get_x() * v.get_z()), //y
-                              (self.get_x() * v.get_y()) - (self.get_y() * v.get_x()) )); //z
+        return Vector3::new((
+            (self.get_y() * v.get_z()) - (self.get_z() * v.get_y()), //x
+            (self.get_z() * v.get_x()) - (self.get_x() * v.get_z()), //y
+            (self.get_x() * v.get_y()) - (self.get_y() * v.get_x()),
+        )); //z
     }
 
     pub fn normalize(&mut self) {
@@ -88,8 +91,9 @@ impl Vector3 {
 /* Associative functions implementation block */
 impl Vector3 {
     /* Constructor */
-    pub fn new<A> (args: A) -> Vector3
-        where A: Instantiator
+    pub fn new<A>(args: A) -> Vector3
+    where
+        A: Instantiator,
     {
         return args.into();
     }
@@ -106,7 +110,9 @@ impl Instantiator for () {
         if DEBUG {
             println!("Vector3::Instantiator: Invoked () overload!");
         }
-        return Vector3{m_data: [0.0, 0.0, 0.0]};
+        return Vector3 {
+            m_data: [0.0, 0.0, 0.0],
+        };
     }
 }
 
@@ -115,7 +121,9 @@ impl Instantiator for i64 {
         if DEBUG {
             println!("Vector3::Instantiator: Invoked (i64) Zero overload!");
         }
-        return Vector3{m_data: [0.0, 0.0, 0.0]};
+        return Vector3 {
+            m_data: [0.0, 0.0, 0.0],
+        };
     }
 }
 
@@ -124,7 +132,9 @@ impl Instantiator for (f32, f32, f32) {
         if DEBUG {
             println!("Vector3::Instantiator: Invoked (f32, f32, f32) overload!");
         }
-        return Vector3{m_data: [self.0, self.1, self.2]};
+        return Vector3 {
+            m_data: [self.0, self.1, self.2],
+        };
     }
 }
 
@@ -133,7 +143,9 @@ impl Instantiator for &Vector3 {
         if DEBUG {
             println!("Vector3::Instantiator: Invoked (&Vector3) overload!");
         }
-        return Vector3{m_data: {self.m_data}}
+        return Vector3 {
+            m_data: { self.m_data },
+        };
     }
 }
 
@@ -142,6 +154,8 @@ impl Instantiator for &Vector4 {
         if DEBUG {
             println!("Vector3::Instantiator: Invoked (&Vector4) overload!");
         }
-        return Vector3{m_data: {[self.m_data[0], self.m_data[1], self.m_data[2]]}};
+        return Vector3 {
+            m_data: { [self.m_data[0], self.m_data[1], self.m_data[2]] },
+        };
     }
 }

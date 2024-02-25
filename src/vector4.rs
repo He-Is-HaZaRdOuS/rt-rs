@@ -2,8 +2,10 @@
 
 use std::fs::File;
 use std::io::Read;
+
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
+
 use crate::DEBUG;
 use crate::vector3::Vector3;
 
@@ -86,18 +88,23 @@ impl Vector4 {
     }
 
     pub fn magnitude(&self) -> f32 {
-        return (self.get_x().powf(2.0) + self.get_y().powf(2.0) + self.get_z().powf(2.0)).sqrt()
+        return (self.get_x().powf(2.0) + self.get_y().powf(2.0) + self.get_z().powf(2.0)).sqrt();
     }
 
     pub fn dot(&self, v: &Vector4) -> f32 {
-        return (self.get_x() * v.get_x()) + (self.get_y() * v.get_y()) + (self.get_z() * v.get_z()) + (self.get_w() * v.get_w());
+        return (self.get_x() * v.get_x())
+            + (self.get_y() * v.get_y())
+            + (self.get_z() * v.get_z())
+            + (self.get_w() * v.get_w());
     }
 
     pub fn cross(&self, v: &Vector4) -> Vector4 {
-        return Vector4::new(( (self.get_y() * v.get_z()) - (self.get_z() * v.get_y()), //x
-                                (self.get_z() * v.get_x()) - (self.get_x() * v.get_z()), //y
-                              (self.get_x() * v.get_y()) - (self.get_y() * v.get_x()), //z
-                            self.get_w())); //w
+        return Vector4::new((
+            (self.get_y() * v.get_z()) - (self.get_z() * v.get_y()), //x
+            (self.get_z() * v.get_x()) - (self.get_x() * v.get_z()), //y
+            (self.get_x() * v.get_y()) - (self.get_y() * v.get_x()), //z
+            self.get_w(),
+        )); //w
     }
 
     pub fn normalize(&mut self) {
@@ -112,8 +119,9 @@ impl Vector4 {
 /* Associative functions implementation block */
 impl Vector4 {
     /* Constructor */
-    pub fn new<A> (args: A) -> Vector4
-        where A: Instantiator
+    pub fn new<A>(args: A) -> Vector4
+    where
+        A: Instantiator,
     {
         return args.into();
     }
@@ -153,7 +161,9 @@ impl Instantiator for () {
         if DEBUG {
             println!("Vector4::Instantiator: Invoked () overload!");
         }
-        return Vector4{m_data: [0.0, 0.0, 0.0, 1.0]};
+        return Vector4 {
+            m_data: [0.0, 0.0, 0.0, 1.0],
+        };
     }
 }
 
@@ -162,16 +172,20 @@ impl Instantiator for i64 {
         if DEBUG {
             println!("Vector4::Instantiator: Invoked (i64) Zero overload!");
         }
-        return Vector4{m_data: [0.0, 0.0, 0.0, 0.0]};
+        return Vector4 {
+            m_data: [0.0, 0.0, 0.0, 0.0],
+        };
     }
 }
 
 impl Instantiator for (f32, f32, f32) {
     fn into(self) -> Vector4 {
-        if DEBUG  {
+        if DEBUG {
             println!("Vector4::Instantiator: Invoked (f32, f32, f32) overload!");
         }
-        return Vector4{m_data: [self.0, self.1, self.2, 1.0]};
+        return Vector4 {
+            m_data: [self.0, self.1, self.2, 1.0],
+        };
     }
 }
 
@@ -180,7 +194,9 @@ impl Instantiator for (f32, f32, f32, f32) {
         if DEBUG {
             println!("Vector4::Instantiator: Invoked (f32, f32, f32, f32) overload!");
         }
-        return Vector4{m_data: [self.0, self.1, self.2, self.3]};
+        return Vector4 {
+            m_data: [self.0, self.1, self.2, self.3],
+        };
     }
 }
 
@@ -189,7 +205,9 @@ impl Instantiator for &Vector3 {
         if DEBUG {
             println!("Vector4::Instantiator: Invoked (&Vector3) overload!");
         }
-        return Vector4{m_data: {[self.m_data[0], self.m_data[1], self.m_data[2], 1.0]}};
+        return Vector4 {
+            m_data: { [self.m_data[0], self.m_data[1], self.m_data[2], 1.0] },
+        };
     }
 }
 
@@ -198,6 +216,8 @@ impl Instantiator for &Vector4 {
         if DEBUG {
             println!("Vector4::Instantiator: Invoked (&Vector4) overload!");
         }
-        return Vector4{m_data: {self.m_data}};
+        return Vector4 {
+            m_data: { self.m_data },
+        };
     }
 }

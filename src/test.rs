@@ -1,9 +1,10 @@
-use rand::random;
 use image::{ImageBuffer, RgbImage};
-use crate::vector4::*;
+use rand::random;
+
+use crate::matrix3::*;
 use crate::matrix4::*;
 use crate::vector3::*;
-use crate::matrix3::*;
+use crate::vector4::*;
 
 pub fn test_vector() {
     println!("Vector3 and Vector4 tests: \n");
@@ -33,17 +34,30 @@ pub fn test_vector() {
     println!();
 
     /* Test Associated Methods */
-    println!("dot product of vec4_3f32 and vec4_4f32: {}", vec4_3f32.dot(&vec4_4f32));
+    println!(
+        "dot product of vec4_3f32 and vec4_4f32: {}",
+        vec4_3f32.dot(&vec4_4f32)
+    );
 
     println!();
 
-    println!("cross product of vec4_4f32 with itself: {:?}", vec4_3f32.cross(&vec4_4f32));
+    println!(
+        "cross product of vec4_4f32 with itself: {:?}",
+        vec4_3f32.cross(&vec4_4f32)
+    );
     println!();
 
-    println!("vec4_3f32 before normalization: {:?} and its magnitude: {}", vec4_3f32, vec4_3f32.magnitude());
+    println!(
+        "vec4_3f32 before normalization: {:?} and its magnitude: {}",
+        vec4_3f32,
+        vec4_3f32.magnitude()
+    );
     vec4_3f32.normalize();
-    println!("vec4_3f32 after normalization: {:?} and its magnitude: {}", vec4_3f32, vec4_3f32.magnitude());
-
+    println!(
+        "vec4_3f32 after normalization: {:?} and its magnitude: {}",
+        vec4_3f32,
+        vec4_3f32.magnitude()
+    );
 }
 
 pub fn test_matrix() {
@@ -68,7 +82,7 @@ pub fn test_matrix() {
     let _mat3_zero = Matrix3::new(0); // any integer creates a zero Matrix3
     let _mat3_zero = Matrix3::zero(); // zero() also creates a zero Matrix3
     let _mat3_mat3 = Matrix3::new(&mat3_identity); // this creates a Matrix3 from the provided Matrix3
-    let _mat3_9f32 = Matrix3::new((1.0, 2.0, 3.0, 4.0, 5.0 , 6.0, 7.0, 8.0, 9.0)); // 9 f32's create a Matrix3
+    let _mat3_9f32 = Matrix3::new((1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0)); // 9 f32's create a Matrix3
     let _mat3_3vec3 = Matrix3::new((&vec3_empty, &vec3_zero, &vec3_3f32)); // 3 Vec3's create a Matrix3
 
     let _mat4_identity = Matrix4::new(()); // an empty tuple creates an identity Matrix4
@@ -76,7 +90,9 @@ pub fn test_matrix() {
     let _mat4_zero = Matrix4::new(0); // any integer creates a zero Matrix4
     let mat4_zero = Matrix4::zero(); // zero() also creates a zero Matrix4
     let _mat4_mat4 = Matrix4::new(&mat4_identity); // this creates a Matrix4 from the provided Matrix4
-    let mat4_16f32 = Matrix4::new((1.0, 2.0, 3.0, 4.0, 5.0 , 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0)); // 16 f32's create a Matrix4
+    let mat4_16f32 = Matrix4::new((
+        1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0, 11.0, 12.0, 13.0, 14.0, 15.0, 16.0,
+    )); // 16 f32's create a Matrix4
     let mat4_4vec4 = Matrix4::new((&vec4_empty, &vec4_zero, &vec4_3f32, &vec4_4f32)); // 4 Vec4's create a Matrix4
 
     println!();
@@ -122,13 +138,11 @@ pub fn test_matrix() {
 
     println!("\nTesting Matrix4 determinant... \n");
 
-    let mat4_16f32 = Matrix4::new((4.0, 2.0, 5.0, 2.0,
-                                               4.0 , 2.0, 7.0, 2.0,
-                                               3.0, 6.0, 1.0, 2.0,
-                                               2.0, 14.0, 5.0, 6.0));
+    let mat4_16f32 = Matrix4::new((
+        4.0, 2.0, 5.0, 2.0, 4.0, 2.0, 7.0, 2.0, 3.0, 6.0, 1.0, 2.0, 2.0, 14.0, 5.0, 6.0,
+    ));
     println!("mat4_16f32: {:?}", mat4_16f32);
     println!("det of mat4_16f32: {}", mat4_16f32.det());
-
 }
 
 pub fn test_json_vector() {
@@ -158,6 +172,4 @@ pub fn test_image() {
 
     // Save the image as “fractal.png”, the format is deduced from the path
     img.save("fractal.png").unwrap();
-
-
 }
