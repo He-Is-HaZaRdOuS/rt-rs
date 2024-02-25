@@ -1,6 +1,3 @@
-use std::fs::File;
-use std::io::Read;
-use crate::matrix4::Matrix4;
 use crate::test::*;
 
 mod vector3;
@@ -10,7 +7,7 @@ mod matrix4;
 mod test;
 
 /* toggles constructor messages */
-const DEBUG: bool = false;
+const DEBUG: bool = true;
 
 fn main() {
 

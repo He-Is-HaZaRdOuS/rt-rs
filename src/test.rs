@@ -1,6 +1,4 @@
-use std::fs::File;
-use std::io::Read;
-use rand::{random, Rng};
+use rand::random;
 use image::{ImageBuffer, RgbImage};
 use crate::vector4::*;
 use crate::matrix4::*;
@@ -149,9 +147,6 @@ pub fn test_image() {
     println!("Generating a 512x512 red-blue gradient image with randomized green value in range of 0-64... (fractal.png) \n");
     // Construct a new RGB ImageBuffer with the specified width and height.
     let mut img: RgbImage = ImageBuffer::new(512, 512);
-
-    // Obtain the image's width and height.
-    let (width, height) = img.dimensions();
 
     // Iterate over the coordinates and pixels of the image
     for (x, y, pixel) in img.enumerate_pixels_mut() {

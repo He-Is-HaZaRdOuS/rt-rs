@@ -3,9 +3,8 @@
 use std::fs::File;
 use std::io::Read;
 use serde::{Deserialize, Serialize};
-use serde_json::{Result, Value};
+use serde_json::Value;
 use crate::DEBUG;
-use crate::matrix4::Matrix4;
 use crate::vector3::Vector3;
 
 #[derive(Debug, Serialize, Deserialize)]
