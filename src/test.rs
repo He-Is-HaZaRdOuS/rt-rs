@@ -147,13 +147,13 @@ pub fn test_matrix() {
 
 pub fn test_json_vector() {
     println!("Testing creating Vector4 from its respective json file:");
-    let vec4_json = Vector4::json("./res/vector.json");
+    let vec4_json = Vector4::new("./res/vector.json");
     println!("{:?}", vec4_json);
 }
 
 pub fn test_json_matrix() {
     println!("Testing creating Matrix4 from its respective json file:");
-    let mat4_json = Matrix4::json("./res/matrix.json");
+    let mat4_json = Matrix4::new("./res/matrix.json");
     println!("{:?}", mat4_json);
 }
 

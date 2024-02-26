@@ -423,6 +423,15 @@ impl Instantiator for (&Vector4, &Vector4, &Vector4, &Vector4) {
     }
 }
 
+impl Instantiator for &str {
+    fn into(self) -> Matrix4 {
+        if DEBUG {
+            println!("Matrix4::Instantiator: Invoked (&str) json overload!");
+        }
+        return Matrix4::json(self);
+    }
+}
+
 impl Rotator for (f32, f32, f32, f32) {
     fn into(self) -> Matrix4 {
         if DEBUG {

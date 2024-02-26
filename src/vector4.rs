@@ -134,8 +134,7 @@ impl Vector4 {
         let mut data = String::new();
         file.read_to_string(&mut data).unwrap();
 
-        let json: serde_json::Value =
-            serde_json::from_str(&data).expect("JSON was not well-formatted");
+        let json: Value = serde_json::from_str(&data).expect("JSON was not well-formatted");
 
         let vals = json.get("values");
 
@@ -219,5 +218,14 @@ impl Instantiator for &Vector4 {
         return Vector4 {
             m_data: { self.m_data },
         };
+    }
+}
+
+impl Instantiator for &str {
+    fn into(self) -> Vector4 {
+        if DEBUG {
+            println!("Vector4::Instantiator: Invoked (&str) json overload!");
+        }
+        return Vector4::json(self);
     }
 }
