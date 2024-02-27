@@ -1,16 +1,19 @@
 use crate::test::*;
 
-mod vector3;
-mod vector4 ;
 mod matrix3;
 mod matrix4;
 mod test;
+mod vector3;
+mod vector4;
 
 /* toggles constructor messages */
 const DEBUG: bool = true;
 
 fn main() {
+    trace_rays();
+}
 
+fn trace_rays() {
     println!("DEBUG: {}", DEBUG);
     test_vector();
     println!();
@@ -21,5 +24,4 @@ fn main() {
     test_json_matrix();
     println!();
     test_image();
-
 }
