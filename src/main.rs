@@ -7,7 +7,7 @@ mod vector3;
 mod vector4;
 
 /* toggles constructor messages */
-const DEBUG: bool = true;
+const DEBUG: bool = false;
 
 fn main() {
     trace_rays();

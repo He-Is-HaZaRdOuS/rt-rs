@@ -112,7 +112,11 @@ impl Instantiator for (&Vector3, &Vector3, &Vector3) {
             println!("Matrix3::Instantiator: Invoked (&Vector3, &Vector3, &Vector3) overload!");
         }
         return Matrix3 {
-            m_data: [self.0.m_data, self.1.m_data, self.2.m_data],
+            m_data: [
+                [self.0.m_data[0], self.1.m_data[0], self.2.m_data[0]],
+                [self.0.m_data[1], self.1.m_data[1], self.2.m_data[1]],
+                [self.0.m_data[2], self.1.m_data[2], self.2.m_data[2]],
+            ],
         };
     }
 }

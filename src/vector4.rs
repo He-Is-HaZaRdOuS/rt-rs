@@ -103,8 +103,17 @@ impl Vector4 {
             (self.get_y() * v.get_z()) - (self.get_z() * v.get_y()), //x
             (self.get_z() * v.get_x()) - (self.get_x() * v.get_z()), //y
             (self.get_x() * v.get_y()) - (self.get_y() * v.get_x()), //z
-            self.get_w(),
-        )); //w
+            self.get_w(),                                            //w
+        ));
+    }
+
+    pub fn cross_zero(&self, v: &Vector4) -> Vector4 {
+        return Vector4::new((
+            (self.get_y() * v.get_z()) - (self.get_z() * v.get_y()), //x
+            (self.get_z() * v.get_x()) - (self.get_x() * v.get_z()), //y
+            (self.get_x() * v.get_y()) - (self.get_y() * v.get_x()), //z
+            0.0,                                                     //w
+        ));
     }
 
     pub fn normalize(&mut self) {

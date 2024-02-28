@@ -100,8 +100,7 @@ impl Matrix4 {
         let mut data = String::new();
         file.read_to_string(&mut data).unwrap();
 
-        let json: serde_json::Value =
-            serde_json::from_str(&data).expect("JSON was not well-formatted");
+        let json: Value = serde_json::from_str(&data).expect("JSON was not well-formatted");
 
         let vals = json.get("values");
 
@@ -418,7 +417,32 @@ impl Instantiator for (&Vector4, &Vector4, &Vector4, &Vector4) {
             );
         }
         return Matrix4 {
-            m_data: [self.0.m_data, self.1.m_data, self.2.m_data, self.3.m_data],
+            m_data: [
+                [
+                    self.0.m_data[0],
+                    self.1.m_data[0],
+                    self.2.m_data[0],
+                    self.3.m_data[0],
+                ],
+                [
+                    self.0.m_data[1],
+                    self.1.m_data[1],
+                    self.2.m_data[1],
+                    self.3.m_data[1],
+                ],
+                [
+                    self.0.m_data[2],
+                    self.1.m_data[2],
+                    self.2.m_data[2],
+                    self.3.m_data[2],
+                ],
+                [
+                    self.0.m_data[3],
+                    self.1.m_data[3],
+                    self.2.m_data[3],
+                    self.3.m_data[3],
+                ],
+            ],
         };
     }
 }

@@ -76,8 +76,8 @@ impl Vector3 {
         return Vector3::new((
             (self.get_y() * v.get_z()) - (self.get_z() * v.get_y()), //x
             (self.get_z() * v.get_x()) - (self.get_x() * v.get_z()), //y
-            (self.get_x() * v.get_y()) - (self.get_y() * v.get_x()),
-        )); //z
+            (self.get_x() * v.get_y()) - (self.get_y() * v.get_x()), //z
+        ));
     }
 
     pub fn normalize(&mut self) {
