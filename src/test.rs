@@ -1,5 +1,7 @@
-use image::{ImageBuffer, RgbImage};
-use rand::random;
+#![allow(dead_code)]
+#![allow(unused_variables)]
+
+use image::{ImageBuffer, RgbaImage};
 
 use crate::matrix3::*;
 use crate::matrix4::*;
@@ -147,29 +149,30 @@ pub fn test_matrix() {
 
 pub fn test_json_vector() {
     println!("Testing creating Vector4 from its respective json file:");
-    let vec4_json = Vector4::new("./res/vector.json");
+    let vec4_json = Vector4::new("res/scene/vector.json");
     println!("{:?}", vec4_json);
 }
 
 pub fn test_json_matrix() {
     println!("Testing creating Matrix4 from its respective json file:");
-    let mat4_json = Matrix4::new("./res/matrix.json");
+    let mat4_json = Matrix4::new("res/scene/matrix.json");
     println!("{:?}", mat4_json);
 }
 
-pub fn test_image() {
-    println!("Generating a 512x512 red-blue gradient image with randomized green value in range of 0-64... (fractal.png) \n");
+pub fn test_image() -> RgbaImage {
+    //println!("Generating a 512x512 red-blue gradient image with randomized green value in range of 0-64... (fractal.png) \n");
     // Construct a new RGB ImageBuffer with the specified width and height.
-    let mut img: RgbImage = ImageBuffer::new(512, 512);
+    let mut img: RgbaImage = ImageBuffer::new(512, 512);
 
     // Iterate over the coordinates and pixels of the image
     for (x, y, pixel) in img.enumerate_pixels_mut() {
-        let r = (0.3 * x as f32) as u8;
-        let b = (0.3 * y as f32) as u8;
-        let g: u8 = random::<u8>() / 4;
-        *pixel = image::Rgb([r, g, b]);
+        //let r = (0.3 * x as f32) as u8;
+        //let b = (0.3 * y as f32) as u8;
+        //let g: u8 = random::<u8>();
+        *pixel = image::Rgba([33, 33, 33, 255]);
     }
 
     // Save the image as “fractal.png”, the format is deduced from the path
-    img.save("fractal.png").unwrap();
+    //img.save("fractal.png").unwrap();
+    return img;
 }

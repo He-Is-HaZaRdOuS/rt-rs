@@ -94,8 +94,7 @@ impl Vector4 {
     pub fn dot(&self, v: &Vector4) -> f32 {
         return (self.get_x() * v.get_x())
             + (self.get_y() * v.get_y())
-            + (self.get_z() * v.get_z())
-            + (self.get_w() * v.get_w());
+            + (self.get_z() * v.get_z());
     }
 
     pub fn cross(&self, v: &Vector4) -> Vector4 {
@@ -121,7 +120,7 @@ impl Vector4 {
         self.set_x(self.get_x() * mag);
         self.set_y(self.get_y() * mag);
         self.set_z(self.get_z() * mag);
-        self.set_w(self.get_w() * mag);
+        //self.set_w(self.get_w() * mag);
     }
 }
 
