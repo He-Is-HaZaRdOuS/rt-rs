@@ -1,17 +1,19 @@
-# 415pr1
+This is deprecated now </br>
+Reboot's on https://github.com/He-Is-HaZaRdOuS/rt-cpp (currenly private)
+# ~~415pr1~~
 
-Placeholder repository for CENG415's project. </br>
-https://github.com/He-Is-HaZaRdOuS/rt-rs
+~~Placeholder repository for CENG415's project.~~ </br>
+~~https://github.com/He-Is-HaZaRdOuS/rt-rs~~
 
-# About
+# ~~About~~
 
-The aim of this project is to build a simple ray tracer from the ground up.
+~~The aim of this project is to build a simple ray tracer from the ground up.~~
 
-# How?
+# ~~How?~~
 
-fn main() { trace_rays(); } /s
+~~fn main() { trace_rays(); } /s~~
 
-# Why Rust?
+# ~~Why Rust?~~
 
 ![Alt](memes/silence.jpg)
 
