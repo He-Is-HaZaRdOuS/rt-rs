@@ -1,3 +1,4 @@
+use std::mem::{size_of, size_of_val};
 use std::time::{Duration, Instant};
 
 use image::ColorType::Rgba8;
@@ -111,7 +112,7 @@ pub fn sdl2() {
             &mut raw_pixels,
             width,
             height,
-            1,
+            width * PixelFormatEnum::RGBA32.byte_size_per_pixel() as u32,
             PixelFormatEnum::RGBA32,
         )
         .unwrap();
