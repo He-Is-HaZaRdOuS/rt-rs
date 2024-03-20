@@ -1,6 +1,6 @@
 use std::time::{Duration, Instant};
 
-
+/*idea*/
 
 use image::ColorType::Rgba8;
 use sdl2::event::Event;
