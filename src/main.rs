@@ -1,9 +1,5 @@
 use std::time::{Duration, Instant};
 
-/*
-Test commit
-*/
-
 use image::ColorType::Rgba8;
 use sdl2::event::Event;
 use sdl2::keyboard::Keycode;
